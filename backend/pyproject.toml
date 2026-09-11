@@ -1,2 +1,5 @@
 [tool.ruff.lint]
 ignore = ["B008", "BLE001"]
+
+[tool.ruff.lint.per-file-ignores]
+"alembic/versions/*.py" = ["I", "UP", "F401", "PIE790"]
