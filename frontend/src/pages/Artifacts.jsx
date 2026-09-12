@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import axios from "axios";
+import api from "../api/axios";
 import {
   Edit3,
   ImagePlus,
@@ -12,7 +12,6 @@ import {
   X,
 } from "lucide-react";
 
-const API_URL = "http://127.0.0.1:8000";
 
 const EMPTY_FORM = {
   artifact_code: "",
@@ -64,7 +63,7 @@ function getImageUrl(imageUrl) {
     return imageUrl;
   }
 
-  return `${API_URL}${imageUrl}`;
+  return `${api.defaults.baseURL}${imageUrl}`;
 }
 
 function getErrorMessage(error, fallback) {
@@ -141,8 +140,8 @@ export default function Artifacts() {
     setError("");
 
     try {
-      const response = await axios.get(
-        `${API_URL}/api/artifacts`,
+      const response = await api.get(
+        `/api/artifacts`,
         {
           params: {
             include_inactive: showInactive,
@@ -258,8 +257,8 @@ export default function Artifacts() {
       const formData = new FormData();
       formData.append("file", file);
 
-      const response = await axios.post(
-        `${API_URL}/api/artifacts/upload-image`,
+      const response = await api.post(
+        `/api/artifacts/upload-image`,
         formData,
         {
           headers: {
@@ -316,8 +315,8 @@ export default function Artifacts() {
     };
 
     try {
-      const response = await axios.post(
-        `${API_URL}/api/artifacts/${editingArtifact.id}/generate-narration`,
+      const response = await api.post(
+        `/api/artifacts/${editingArtifact.id}/generate-narration`,
         payload,
         {
           headers: getAuthHeaders(),
@@ -369,8 +368,8 @@ export default function Artifacts() {
     setAiSuccess("");
 
     try {
-      const response = await axios.post(
-        `${API_URL}/api/artifacts/${editingArtifact.id}/save-narration`,
+      const response = await api.post(
+        `/api/artifacts/${editingArtifact.id}/save-narration`,
         {
           narration,
         },
@@ -451,8 +450,8 @@ export default function Artifacts() {
       if (editingArtifact) {
         payload.is_active = form.is_active;
 
-        await axios.put(
-          `${API_URL}/api/artifacts/${editingArtifact.id}`,
+        await api.put(
+          `/api/artifacts/${editingArtifact.id}`,
           payload,
           {
             headers: getAuthHeaders(),
@@ -461,8 +460,8 @@ export default function Artifacts() {
 
         setSuccess("Cập nhật hiện vật thành công.");
       } else {
-        await axios.post(
-          `${API_URL}/api/artifacts`,
+        await api.post(
+          `/api/artifacts`,
           payload,
           {
             headers: getAuthHeaders(),
@@ -505,8 +504,8 @@ export default function Artifacts() {
     setSuccess("");
 
     try {
-      await axios.delete(
-        `${API_URL}/api/artifacts/${artifact.id}`,
+      await api.delete(
+        `/api/artifacts/${artifact.id}`,
         {
           headers: getAuthHeaders(),
         },

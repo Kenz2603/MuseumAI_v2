@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../api/axios";
 import {
   Loader2,
   LockKeyhole,
@@ -8,7 +8,6 @@ import {
   UserRound,
 } from "lucide-react";
 
-const API_URL = "http://127.0.0.1:8000";
 
 const MANAGEMENT_ROLES = new Set([
   "admin",
@@ -196,8 +195,8 @@ export default function Login() {
     try {
       setLoading(true);
 
-      const response = await axios.post(
-        `${API_URL}/api/auth/login`,
+      const response = await api.post(
+      "/api/auth/login",
         {
           username: form.username.trim(),
           password: form.password,
