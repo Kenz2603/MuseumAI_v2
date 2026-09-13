@@ -60,7 +60,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
     "http://localhost:5173",
-    "https://museumai.io.vn",
+    "https://www.museumai.io.vn",
 ],
     allow_credentials=True,
     allow_methods=["*"],
