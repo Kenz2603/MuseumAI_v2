@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   Landmark,
   CalendarDays,
@@ -8,28 +9,30 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-const statistics = [
+import api from "../api/axios";
+
+const statisticsConfig = [
   {
+    key: "artifacts",
     title: "Hiện vật",
-    value: "0",
     description: "Tổng số hiện vật",
     icon: Landmark,
   },
   {
+    key: "exhibitions",
     title: "Triển lãm",
-    value: "0",
     description: "Tổng số triển lãm",
     icon: CalendarDays,
   },
   {
+    key: "visitors",
     title: "Khách tham quan",
-    value: "0",
     description: "Tổng số khách",
     icon: Users,
   },
   {
+    key: "tickets",
     title: "Vé",
-    value: "0",
     description: "Tổng số vé",
     icon: Ticket,
   },
@@ -75,6 +78,63 @@ const modules = [
 ];
 
 export default function Dashboard() {
+  const [statistics, setStatistics] = useState({
+    artifacts: 0,
+    exhibitions: 0,
+    visitors: 0,
+    tickets: 0,
+  });
+
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    async function loadDashboard() {
+      try {
+        const token = localStorage.getItem("access_token");
+
+        if (!token) {
+          return;
+        }
+
+        const [dashboardResponse, userResponse] = await Promise.all([
+          api.get("/api/dashboard/summary", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }),
+          api.get("/api/auth/me", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }),
+        ]);
+
+        setStatistics(
+          dashboardResponse.data?.statistics ?? {
+            artifacts: 0,
+            exhibitions: 0,
+            visitors: 0,
+            tickets: 0,
+          }
+        );
+
+        setCurrentUser(userResponse.data ?? null);
+      } catch (error) {
+        console.error(
+          "[MuseumAI] Không thể tải dữ liệu Dashboard:",
+          error
+        );
+      }
+    }
+
+    loadDashboard();
+  }, []);
+
+  const displayName =
+    currentUser?.full_name ||
+    currentUser?.username ||
+    "Admin";
+
   return (
     <div className="dashboard-page">
       {/* =========================
@@ -86,7 +146,7 @@ export default function Dashboard() {
           <h2>Trang chủ</h2>
 
           <p className="dashboard-greeting">
-            Xin chào, Admin!
+            Xin chào, {displayName}!
           </p>
 
           <p className="dashboard-description">
@@ -112,7 +172,7 @@ export default function Dashboard() {
         </div>
 
         <div className="dashboard-stat-grid">
-          {statistics.map((item) => {
+          {statisticsConfig.map((item) => {
             const Icon = item.icon;
 
             return (
@@ -127,7 +187,9 @@ export default function Dashboard() {
                 <div className="dashboard-stat-content">
                   <span>{item.title}</span>
 
-                  <strong>{item.value}</strong>
+                  <strong>
+                    {statistics[item.key] ?? 0}
+                  </strong>
 
                   <small>
                     {item.description}

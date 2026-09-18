@@ -8,6 +8,8 @@ import {
   Ticket,
   MessageSquare,
   UserCog,
+  History,
+  Bot,
   LogOut,
 } from "lucide-react";
 
@@ -21,7 +23,7 @@ const MANAGEMENT_ROLES = new Set([
 
 const menuItems = [
   {
-    label: "Dashboard",
+    label: "Trang chủ",
     path: "/dashboard",
     icon: LayoutDashboard,
     roles: ["admin", "content_staff", "ticket_staff"],
@@ -67,6 +69,18 @@ const menuItems = [
     path: "/users",
     icon: UserCog,
     roles: ["admin"],
+  },
+  {
+    label: "Lịch sử đăng nhập",
+    path: "/login-history",
+    icon: History,
+    roles: ["admin"],
+  },
+  {
+    label: "Phân tích AI",
+    path: "/ai-analysis",
+    icon: Bot,
+    roles: ["admin", "content_staff", "ticket_staff"],
   },
 ];
 

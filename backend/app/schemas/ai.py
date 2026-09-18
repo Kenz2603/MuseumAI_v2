@@ -1,3 +1,5 @@
+from typing import Any
+
 from pydantic import BaseModel, ConfigDict, Field
 
 
@@ -33,6 +35,9 @@ class AIChatResponse(BaseModel):
     source: str
     data_verified: bool
     ai_fallback: bool = False
+
+    data: dict[str, Any] | None = None
+    chart: dict[str, Any] | None = None
 
     model_config = ConfigDict(
         from_attributes=True,

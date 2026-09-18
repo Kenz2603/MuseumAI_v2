@@ -11,6 +11,8 @@ import Visitors from "../pages/Visitors";
 import Tickets from "../pages/Tickets";
 import Feedback from "../pages/Feedback";
 import Users from "../pages/Users";
+import AIAnalysis from "../pages/AIAnalysis";
+import LoginHistory from "../pages/LoginHistory";
 
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -29,6 +31,8 @@ export default function AppRoutes() {
           <Route path="/tickets" element={<Tickets />} />
           <Route path="/feedback" element={<Feedback />} />
           <Route path="/users" element={<Users />} />
+          <Route path="/login-history" element={<LoginHistory />} />
+          <Route path="/ai-analysis" element={<AIAnalysis />} />
         </Route>
       </Route>
 

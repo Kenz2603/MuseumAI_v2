@@ -10,6 +10,7 @@ from app.core.database import SessionLocal
 from app.routers.ai import router as ai_router
 from app.routers.artifacts import router as artifacts_router
 from app.routers.auth import router as auth_router
+from app.routers.dashboard import router as dashboard_router
 from app.routers.exhibition_areas import (
     router as exhibition_areas_router,
 )
@@ -20,6 +21,9 @@ from app.routers.exhibitions import (
     router as exhibitions_router,
 )
 from app.routers.feedback import router as feedback_router
+from app.routers.login_history import (
+    router as login_history_router,
+)
 from app.routers.tickets import router as tickets_router
 from app.routers.users import router as users_router
 from app.routers.visitors import router as visitors_router
@@ -59,9 +63,9 @@ app.mount(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-    "http://localhost:5173",
-    "https://www.museumai.io.vn",
-],
+        "http://localhost:5173",
+        "https://www.museumai.io.vn",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -69,6 +73,8 @@ app.add_middleware(
 
 
 app.include_router(auth_router)
+app.include_router(login_history_router)
+app.include_router(dashboard_router)
 app.include_router(users_router)
 app.include_router(artifacts_router)
 app.include_router(exhibition_areas_router)

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Request, status
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
@@ -8,6 +8,7 @@ from app.core.security import (
     hash_password,
     verify_password,
 )
+from app.models.login_history import LoginHistory
 from app.models.role import Role
 from app.models.user import User
 from app.models.visitor import Visitor
@@ -176,6 +177,7 @@ def register(
 # Admin / Content Staff / Ticket Staff:
 # - Được xác thực.
 # - Được cấp JWT.
+# - Được ghi nhận lịch sử đăng nhập thành công.
 # ============================================================
 
 @router.post(
@@ -184,6 +186,7 @@ def register(
 )
 def login(
     data: LoginRequest,
+    request: Request,
     db: Session = Depends(get_db),
 ):
     # --------------------------------------------------------
@@ -243,8 +246,10 @@ def login(
     # visitor không thuộc hệ thống Management.
     #
     # Quan trọng:
-    # Kiểm tra trước khi tạo JWT.
-    # Vì vậy visitor không nhận được access_token.
+    # Kiểm tra trước khi tạo JWT và trước khi ghi
+    # lịch sử đăng nhập.
+    # Vì vậy visitor không nhận được access_token và
+    # không xuất hiện trong login_history.
     # --------------------------------------------------------
 
     if user.role.name not in MANAGEMENT_ROLES:
@@ -257,6 +262,42 @@ def login(
         )
 
     # --------------------------------------------------------
+    # Lấy IP client
+    # --------------------------------------------------------
+    #
+    # request.client có thể không tồn tại trong một số
+    # trường hợp đặc biệt, vì vậy kiểm tra an toàn trước.
+    # --------------------------------------------------------
+
+    client_ip = (
+        request.client.host
+        if request.client is not None
+        else None
+    )
+
+    # --------------------------------------------------------
+    # Ghi lịch sử đăng nhập thành công
+    # --------------------------------------------------------
+    #
+    # Chỉ được thực hiện sau khi:
+    # - Username hợp lệ
+    # - Password đúng
+    # - Account đang active
+    # - Role tồn tại
+    # - Role thuộc MANAGEMENT_ROLES
+    #
+    # Do đó login_history chỉ chứa các tài khoản quản lý
+    # đăng nhập thành công.
+    # --------------------------------------------------------
+
+    login_history = LoginHistory(
+        user_id=user.id,
+        ip_address=client_ip,
+    )
+
+    db.add(login_history)
+
+    # --------------------------------------------------------
     # Tạo JWT
     # --------------------------------------------------------
 
@@ -264,6 +305,12 @@ def login(
         user_id=user.id,
         role=user.role.name,
     )
+
+    # --------------------------------------------------------
+    # Commit cả login history và transaction đăng nhập
+    # --------------------------------------------------------
+
+    db.commit()
 
     return {
         "access_token": token,
