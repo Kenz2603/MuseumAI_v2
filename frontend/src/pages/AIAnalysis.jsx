@@ -275,11 +275,12 @@ function SummaryCards({ data }) {
   }
 
   const entries = Object.entries(data).filter(
-    ([, value]) =>
-      typeof value !== "object" ||
-      value === null ||
-      Array.isArray(value)
-  );
+  ([, value]) =>
+    value !== null &&
+    value !== undefined &&
+    !Array.isArray(value) &&
+    typeof value !== "object"
+);
 
   if (!entries.length) {
     return null;
