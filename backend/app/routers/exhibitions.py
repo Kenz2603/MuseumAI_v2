@@ -79,7 +79,11 @@ def list_exhibitions(
     ),
     db: Session = Depends(get_db),
     current_user: User = Depends(
-        require_roles("admin", "content_staff")
+        require_roles(
+            "admin",
+            "content_staff",
+            "ticket_staff",
+        )
     ),
 ):
     query = db.query(Exhibition)
