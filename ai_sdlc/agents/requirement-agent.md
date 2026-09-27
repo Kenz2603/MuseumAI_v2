@@ -42,3 +42,19 @@ Nếu yêu cầu chưa rõ, đánh dấu:
 - RBAC.
 - Acceptance Criteria.
 - Human Review items.
+
+## Handoff
+
+Output của Requirement Agent là đầu vào cho Design Agent.
+
+Requirement Agent phải cung cấp tối thiểu:
+
+- Actor.
+- Use Case.
+- Functional Requirement.
+- Business Rule.
+- RBAC.
+- Acceptance Criteria.
+- Các vấn đề cần Human Review.
+
+Chỉ các yêu cầu đã được xác nhận mới được chuyển sang bước thiết kế.

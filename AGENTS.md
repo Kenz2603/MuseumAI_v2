@@ -85,3 +85,38 @@ ai_sdlc/
 - Testing
 - Code Review
 - Deployment
+
+## Agent – Skill Mapping
+
+| Agent | Skills |
+|---|---|
+| Requirement Agent | Requirement Analysis |
+| Design Agent | UML Design |
+| Coding Agent | Backend Development, Frontend Development |
+| Testing Agent | Testing |
+| Critic Agent | Code Review, Requirement Analysis, UML Design |
+| Deployment Agent | Deployment |
+
+## AI-SDLC Workflow
+
+Requirement Agent
+→ Design Agent
+→ Coding Agent
+→ Testing Agent
+→ Critic Agent
+→ Deployment Agent
+
+### Handoff Rules
+
+1. Requirement Agent tạo requirement artifacts.
+2. Design Agent sử dụng requirement artifacts để tạo design artifacts.
+3. Coding Agent triển khai code dựa trên requirement và design đã xác nhận.
+4. Testing Agent kiểm thử code dựa trên requirement và Business Rule.
+5. Critic Agent kiểm tra tính nhất quán giữa requirement, design, code và test.
+6. Deployment Agent chỉ triển khai phiên bản đã được kiểm tra.
+
+Nếu Agent phát hiện thông tin không đủ để quyết định:
+
+[NEEDS HUMAN REVIEW]
+
+Agent không được tự thay đổi nghiệp vụ để giải quyết điểm chưa rõ.

@@ -18,6 +18,15 @@ Hỗ trợ kiểm tra và triển khai MuseumAI.
 
 - Deployment Skill.
 
+## Input
+
+- Code đã được kiểm thử.
+- Test Results.
+- Environment configuration.
+- Database migration.
+- Backend configuration.
+- Frontend configuration.
+
 ## Constraint
 
 - Không expose secret.
@@ -30,3 +39,13 @@ Hỗ trợ kiểm tra và triển khai MuseumAI.
 - Verification result.
 - Deployment issue.
 - Suggested action.
+
+## Pre-Deployment Conditions
+
+Chỉ thực hiện deployment khi:
+
+- Code đã qua Testing.
+- Critical defects đã được xử lý hoặc Human Review chấp nhận.
+- Database migration đã được kiểm tra.
+- Environment variables đã được cấu hình.
+- Secret không tồn tại trong Frontend.

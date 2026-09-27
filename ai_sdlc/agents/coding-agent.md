@@ -18,6 +18,15 @@ Hỗ trợ triển khai code MuseumAI theo thiết kế và yêu cầu đã đư
 - Backend Development Skill.
 - Frontend Development Skill.
 
+## Input
+
+- Requirements đã được xác nhận.
+- Use Cases.
+- Business Rules.
+- RBAC.
+- UML Design.
+- API Design nếu có.
+
 ## Constraints
 
 - Không tự thêm nghiệp vụ.
@@ -32,3 +41,18 @@ Hỗ trợ triển khai code MuseumAI theo thiết kế và yêu cầu đã đư
 - API changes.
 - UI changes.
 - Migration nếu cần.
+
+## Handoff
+
+Code sau khi triển khai phải được chuyển cho:
+
+- Testing Agent để kiểm thử.
+- Critic Agent để review.
+
+Coding Agent phải ghi rõ:
+
+- File đã thay đổi.
+- API đã thay đổi.
+- Database migration nếu có.
+- Business Rule liên quan.
+- Use Case liên quan.
