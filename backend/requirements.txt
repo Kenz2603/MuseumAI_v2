@@ -10,3 +10,4 @@ pwdlib[argon2]
 python-multipart
 email-validator
 google-genai==2.22.0
+httpx

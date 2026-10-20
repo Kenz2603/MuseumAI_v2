@@ -1,3 +1,4 @@
+import logging
 from uuid import uuid4
 
 from fastapi import (
@@ -24,7 +25,9 @@ from app.schemas.artifact import (
     NarrationGenerateResponse,
     NarrationSaveRequest,
 )
-from app.services.gemini_service import gemini_service
+from app.services.gemini_service import GeminiServiceError, gemini_service
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(
     prefix="/api/artifacts",
@@ -242,11 +245,22 @@ YÊU CẦU BỔ SUNG CỦA NHÂN VIÊN:
             temperature=0.4,
             max_output_tokens=2048,
         )
-    except Exception as exc:
+    except GeminiServiceError as exc:
+        logger.warning(
+            "Gemini narration failed: reason=%s upstream_status=%s",
+            exc.reason,
+            exc.upstream_status,
+        )
+        raise HTTPException(
+            status_code=exc.status_code,
+            detail=exc.detail,
+        ) from None
+    except Exception:
+        logger.error("Gemini narration failed: reason=unexpected")
         raise HTTPException(
             status_code=status.HTTP_502_BAD_GATEWAY,
             detail="Không thể tạo nội dung thuyết minh bằng AI.",
-        ) from exc
+        ) from None
 
     return NarrationGenerateResponse(
         artifact_id=artifact.id,
