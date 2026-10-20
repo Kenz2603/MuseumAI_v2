@@ -63,7 +63,7 @@ function getImageUrl(imageUrl) {
     return imageUrl;
   }
 
-  return `${api.defaults.baseURL}${imageUrl}`;
+  return new URL(imageUrl, `${api.defaults.baseURL}/`).href;
 }
 
 function getErrorMessage(error, fallback) {

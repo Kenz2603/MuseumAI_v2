@@ -8,7 +8,7 @@ import {
   Loader2,
 } from "lucide-react";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL;
+import { API_BASE_URL } from "../../api/config";
 
 const INITIAL_MESSAGE = {
   id: "welcome",

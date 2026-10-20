@@ -1,4 +1,3 @@
-from pathlib import Path
 from uuid import uuid4
 
 from fastapi import (
@@ -12,6 +11,7 @@ from fastapi import (
 )
 from sqlalchemy.orm import Session
 
+from app.core.config import settings
 from app.core.database import get_db
 from app.core.dependencies import require_roles
 from app.models.artifact import Artifact
@@ -31,7 +31,7 @@ router = APIRouter(
     tags=["Artifacts"],
 )
 
-UPLOAD_DIR = Path("uploads")
+UPLOAD_DIR = settings.upload_path
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 ALLOWED_IMAGE_TYPES = {

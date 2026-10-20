@@ -1,5 +1,7 @@
 # MuseumAI
 
+Cấu hình kết nối Azure PostgreSQL, môi trường frontend và Railway: [CONFIGURATION.md](CONFIGURATION.md).
+
 ## Hệ thống quản lý bảo tàng tích hợp trí tuệ nhân tạo
 
 MuseumAI là hệ thống quản lý bảo tàng được xây dựng theo kiến trúc **Frontend – Backend – Database**, hỗ trợ số hóa và quản lý các nghiệp vụ của bảo tàng.
@@ -523,7 +525,7 @@ DEBUG=False
 HOST=0.0.0.0
 PORT=8000
 
-DATABASE_URL=postgresql+psycopg2://username:password@host:5432/database
+DATABASE_URL=postgresql+psycopg2://<username>:<url-encoded-password>@museumai-postgres-student.postgres.database.azure.com:5432/museum_ai_v2?sslmode=require
 
 SECRET_KEY=CHANGE_ME
 ALGORITHM=HS256
@@ -534,6 +536,7 @@ GEMINI_MODEL=gemini-3.1-flash-lite
 
 CHROMA_DB_PATH=./chroma_db
 UPLOAD_DIR=uploads
+CORS_ORIGINS=["http://localhost:5173","https://www.museumai.io.vn","https://museumai.io.vn"]
 ```
 
 > Không commit `backend/.env` lên GitHub.

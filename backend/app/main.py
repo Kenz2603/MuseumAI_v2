@@ -1,5 +1,4 @@
 from contextlib import asynccontextmanager
-from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -32,13 +31,14 @@ from app.services.seed import seed_admin, seed_roles
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    db = SessionLocal()
+    if settings.ENABLE_STARTUP_SEED:
+        db = SessionLocal()
 
-    try:
-        seed_roles(db)
-        seed_admin(db)
-    finally:
-        db.close()
+        try:
+            seed_roles(db)
+            seed_admin(db)
+        finally:
+            db.close()
 
     yield
 
@@ -50,7 +50,7 @@ app = FastAPI(
 )
 
 
-UPLOAD_DIR = Path("uploads")
+UPLOAD_DIR = settings.upload_path
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 app.mount(
@@ -62,13 +62,10 @@ app.mount(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "https://www.museumai.io.vn",
-    ],
+    allow_origins=settings.CORS_ORIGINS,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type", "Accept"],
 )
 
 

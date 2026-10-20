@@ -14,7 +14,7 @@ import {
   X,
 } from "lucide-react";
 
-const API_URL = import.meta.env.VITE_API_URL;
+import { API_BASE_URL as API_URL } from "../api/config";
 
 const MANAGEMENT_ROLES = [
   "admin",

@@ -150,8 +150,7 @@ export default function Dashboard() {
           </p>
 
           <p className="dashboard-description">
-            Chào mừng bạn đến với hệ thống quản lý bảo tàng
-            MuseumAI.
+            Chào mừng bạn đến với hệ thống quản lý bảo tàng tích hợp AI.
           </p>
         </div>
       </section>
