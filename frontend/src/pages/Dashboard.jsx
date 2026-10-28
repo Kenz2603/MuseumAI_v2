@@ -78,12 +78,7 @@ const modules = [
 ];
 
 export default function Dashboard() {
-  const [statistics, setStatistics] = useState({
-    artifacts: 0,
-    exhibitions: 0,
-    visitors: 0,
-    tickets: 0,
-  });
+  const [statistics, setStatistics] = useState({});
 
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -110,12 +105,7 @@ export default function Dashboard() {
         ]);
 
         setStatistics(
-          dashboardResponse.data?.statistics ?? {
-            artifacts: 0,
-            exhibitions: 0,
-            visitors: 0,
-            tickets: 0,
-          }
+          dashboardResponse.data?.statistics ?? {}
         );
 
         setCurrentUser(userResponse.data ?? null);
@@ -134,6 +124,10 @@ export default function Dashboard() {
     currentUser?.full_name ||
     currentUser?.username ||
     "Admin";
+
+  const visibleStatistics = statisticsConfig.filter(
+    (item) => statistics[item.key] != null
+  );
 
   return (
     <div className="dashboard-page">
@@ -171,7 +165,7 @@ export default function Dashboard() {
         </div>
 
         <div className="dashboard-stat-grid">
-          {statisticsConfig.map((item) => {
+          {visibleStatistics.map((item) => {
             const Icon = item.icon;
 
             return (
@@ -187,7 +181,7 @@ export default function Dashboard() {
                   <span>{item.title}</span>
 
                   <strong>
-                    {statistics[item.key] ?? 0}
+                    {statistics[item.key]}
                   </strong>
 
                   <small>
