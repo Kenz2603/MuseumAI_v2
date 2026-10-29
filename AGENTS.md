@@ -26,7 +26,9 @@ MuseumAI_v2 là hệ thống quản lý bảo tàng có tích hợp AI.
 - Google Gemini API
 
 ### Deployment
-- Railway
+- Hiện hành đã xác nhận: Azure VM, Docker Compose, Caddy, frontend React/Vite và backend FastAPI.
+- Database: Azure PostgreSQL Flexible Server.
+- Railway là phương án khi được yêu cầu; xác minh provider/service thực tế trước deploy.
 
 ## Actors
 
@@ -75,6 +77,11 @@ ai_sdlc/
 - Testing Agent
 - Critic Agent
 - Deployment Agent
+- AI Engineer Agent
+- Security Agent
+- Database Agent
+- Incident Agent
+- Documentation Agent
 
 ### Skills
 
@@ -85,6 +92,12 @@ ai_sdlc/
 - Testing
 - Code Review
 - Deployment
+- AI Integration
+- Prompt Evaluation
+- Security Review
+- Database Management
+- Incident Diagnosis
+- Technical Documentation
 
 ## Agent – Skill Mapping
 
@@ -96,6 +109,11 @@ ai_sdlc/
 | Testing Agent | Testing |
 | Critic Agent | Code Review, Requirement Analysis, UML Design |
 | Deployment Agent | Deployment |
+| AI Engineer Agent | AI Integration, Prompt Evaluation |
+| Security Agent | Security Review |
+| Database Agent | Database Management |
+| Incident Agent | Incident Diagnosis |
+| Documentation Agent | Technical Documentation |
 
 ## AI-SDLC Workflow
 
@@ -120,3 +138,14 @@ Nếu Agent phát hiện thông tin không đủ để quyết định:
 [NEEDS HUMAN REVIEW]
 
 Agent không được tự thay đổi nghiệp vụ để giải quyết điểm chưa rõ.
+
+## Áp dụng AI-SDLC
+
+- Danh mục: [ai_sdlc/catalog.json](ai_sdlc/catalog.json), routing: [ai_sdlc/README.md](ai_sdlc/README.md), quy tắc chung: [workflow.md](ai_sdlc/workflow.md).
+- Đọc đúng agent/prompt/skill và chỉ dùng các giai đoạn cần thiết. File trong repository không tự đăng ký hay khởi chạy native subagent; không suy ra phải tạo nhiều agent từ danh sách vai trò.
+- Quyền sửa local, push, deploy, gọi AI thật và ghi database phải đúng phạm vi đã được người dùng cho phép trong phiên; không hỏi duyệt lại hành động đã cho phép.
+- Không đọc/in secret, toàn bộ DATABASE_URL, private key, token, raw dotenv hoặc dữ liệu cá nhân. Dùng bằng chứng đã lọc.
+- Startup có thể seed nếu ENABLE_STARTUP_SEED bật; đăng nhập thành công ghi login_history. Test ghi dùng database test tách biệt, không Azure production mặc định.
+- Dashboard dùng null cho thống kê ngoài quyền và ẩn thẻ đó; số 0 hợp lệ vẫn hiển thị. Không mở quyền backend để sửa UI.
+- Chat 200 có thể từ fallback; mock không chứng minh Gemini thật hoạt động hoặc nội dung chính xác. Phân biệt build, push và deploy bằng evidence.
+- Dùng [handoff](ai_sdlc/templates/handoff.md), nhật ký AI và thí nghiệm prompt khi cần; không dựng kết quả, lịch sử hoặc phê duyệt.

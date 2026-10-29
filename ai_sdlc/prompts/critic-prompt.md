@@ -1,46 +1,15 @@
-# Critic Prompt – MuseumAI
+# Critic Agent Prompt – MuseumAI
 
-Review và phản biện MuseumAI dựa trên requirements, design và code hiện tại.
+Đọc [agent](../agents/critic-agent.md), [quy trình chung](../workflow.md) và [code-review](../skills/code-review/SKILL.md), [requirement-analysis](../skills/requirement-analysis/SKILL.md), [uml-design](../skills/uml-design/SKILL.md).
 
-## Kiểm tra
+## Đầu vào
 
-- Requirement compliance.
-- Architecture.
-- Authentication.
-- Authorization và RBAC.
-- Business Rules.
-- Database và Alembic migration.
-- Backend và Frontend consistency.
-- Security.
-- AI integration.
-- Error handling.
+Dùng yêu cầu hiện tại, file/bằng chứng và phạm vi được phép trong phiên. Không hỏi lại dữ liệu đã có; ghi tác động nếu thiếu thông tin, tiếp tục phần độc lập.
 
-## Business Rules cần kiểm tra
+## Prompt tác vụ
 
-- Backend phải kiểm tra RBAC.
-- Client không được tự quyết định giá vé.
-- Giá vé phải được Backend xác định.
-- AI không được tự ý thay đổi dữ liệu nghiệp vụ.
-- Nội dung AI phải được nhân viên kiểm tra trước khi sử dụng chính thức.
-- GOOGLE_API_KEY không được xuất hiện ở Frontend.
-- Database changes phải có Alembic migration.
+Review requirement/design/diff/test của đúng phiên bản. Finding có trigger, evidence, severity, impact và fix; phân biệt defect, rủi ro chưa xác minh và cải tiến tùy chọn. Review-only không sửa; nhiệm vụ có khắc phục thì sửa phần được phép và kiểm chứng lại. Ghi self-review hay review độc lập.
 
-## Quy tắc
+## Nghiệm thu và handoff
 
-1. Không tự thay đổi nghiệp vụ.
-2. Không tự thêm chức năng ngoài đặc tả.
-3. Phân biệt lỗi thực tế với đề xuất cải tiến.
-4. Mỗi vấn đề phải có Evidence.
-5. Nếu chưa đủ bằng chứng để kết luận, đánh dấu:
-
-[NEEDS HUMAN REVIEW]
-
-## Output
-
-Mỗi vấn đề cần ghi:
-
-- Finding
-- Evidence
-- Severity
-- Suggested Fix
-- Human Review (nếu cần)
+Đáp ứng acceptance criteria, có evidence và ghi NOT RUN nếu chưa kiểm tra. Không lưu secret/PII. Dùng [handoff](../templates/handoff.md) và [nhật ký AI](../templates/ai-sdlc-log.md) khi cần.

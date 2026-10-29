@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "agents": [
+    {
+      "id": "requirement-agent",
+      "name": "Requirement Agent",
+      "agent": "agents/requirement-agent.md",
+      "prompt": "prompts/requirement-prompt.md",
+      "skills": [
+        "requirement-analysis"
+      ]
+    },
+    {
+      "id": "design-agent",
+      "name": "Design Agent",
+      "agent": "agents/design-agent.md",
+      "prompt": "prompts/design-prompt.md",
+      "skills": [
+        "uml-design"
+      ]
+    },
+    {
+      "id": "coding-agent",
+      "name": "Coding Agent",
+      "agent": "agents/coding-agent.md",
+      "prompt": "prompts/coding-prompt.md",
+      "skills": [
+        "backend-development",
+        "frontend-development"
+      ]
+    },
+    {
+      "id": "testing-agent",
+      "name": "Testing Agent",
+      "agent": "agents/testing-agent.md",
+      "prompt": "prompts/testing-prompt.md",
+      "skills": [
+        "testing"
+      ]
+    },
+    {
+      "id": "critic-agent",
+      "name": "Critic Agent",
+      "agent": "agents/critic-agent.md",
+      "prompt": "prompts/critic-prompt.md",
+      "skills": [
+        "code-review",
+        "requirement-analysis",
+        "uml-design"
+      ]
+    },
+    {
+      "id": "deployment-agent",
+      "name": "Deployment Agent",
+      "agent": "agents/deployment-agent.md",
+      "prompt": "prompts/deployment-prompt.md",
+      "skills": [
+        "deployment"
+      ]
+    },
+    {
+      "id": "ai-engineer-agent",
+      "name": "AI Engineer Agent",
+      "agent": "agents/ai-engineer-agent.md",
+      "prompt": "prompts/ai-engineer-prompt.md",
+      "skills": [
+        "ai-integration",
+        "prompt-evaluation"
+      ]
+    },
+    {
+      "id": "security-agent",
+      "name": "Security Agent",
+      "agent": "agents/security-agent.md",
+      "prompt": "prompts/security-prompt.md",
+      "skills": [
+        "security-review"
+      ]
+    },
+    {
+      "id": "database-agent",
+      "name": "Database Agent",
+      "agent": "agents/database-agent.md",
+      "prompt": "prompts/database-prompt.md",
+      "skills": [
+        "database-management"
+      ]
+    },
+    {
+      "id": "incident-agent",
+      "name": "Incident Agent",
+      "agent": "agents/incident-agent.md",
+      "prompt": "prompts/incident-prompt.md",
+      "skills": [
+        "incident-diagnosis"
+      ]
+    },
+    {
+      "id": "documentation-agent",
+      "name": "Documentation Agent",
+      "agent": "agents/documentation-agent.md",
+      "prompt": "prompts/documentation-prompt.md",
+      "skills": [
+        "technical-documentation"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "id": "requirement-analysis",
+      "path": "skills/requirement-analysis/SKILL.md"
+    },
+    {
+      "id": "uml-design",
+      "path": "skills/uml-design/SKILL.md"
+    },
+    {
+      "id": "backend-development",
+      "path": "skills/backend-development/SKILL.md"
+    },
+    {
+      "id": "frontend-development",
+      "path": "skills/frontend-development/SKILL.md"
+    },
+    {
+      "id": "testing",
+      "path": "skills/testing/SKILL.md"
+    },
+    {
+      "id": "code-review",
+      "path": "skills/code-review/SKILL.md"
+    },
+    {
+      "id": "deployment",
+      "path": "skills/deployment/SKILL.md"
+    },
+    {
+      "id": "ai-integration",
+      "path": "skills/ai-integration/SKILL.md"
+    },
+    {
+      "id": "prompt-evaluation",
+      "path": "skills/prompt-evaluation/SKILL.md"
+    },
+    {
+      "id": "security-review",
+      "path": "skills/security-review/SKILL.md"
+    },
+    {
+      "id": "database-management",
+      "path": "skills/database-management/SKILL.md"
+    },
+    {
+      "id": "incident-diagnosis",
+      "path": "skills/incident-diagnosis/SKILL.md"
+    },
+    {
+      "id": "technical-documentation",
+      "path": "skills/technical-documentation/SKILL.md"
+    }
+  ]
+}

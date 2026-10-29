@@ -1,4 +1,4 @@
-﻿---
+---
 name: code-review
 description: Review code MuseumAI theo yêu cầu, kiến trúc, bảo mật, RBAC và Business Rule.
 ---
@@ -67,3 +67,11 @@ Kiểm tra kết nối và xử lý Gemini AI API.
 - Evidence
 - Suggested Fix
 - Human Review
+
+## Hướng dẫn theo source và môi trường
+
+Đọc [quy trình chung](../../workflow.md).
+
+Review đúng diff/commit và acceptance criteria. Finding cần trigger/impact và evidence. Ưu tiên quyền backend theo action, null dashboard so với 0, tiền/giá vé, draft/human save và data flow AI. Chat 200 có thể fallback; fixture tổng hợp không chứng minh root cause production.
+
+Dùng [Security Review](../security-review/SKILL.md) khi audit và [Database Management](../database-management/SKILL.md) cho schema. Review-only không sửa; tác vụ có khắc phục thì sửa và xác minh lại. Ghi self-review hay độc lập.

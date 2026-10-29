@@ -1,4 +1,4 @@
-﻿# Coding Agent – MuseumAI
+# Coding Agent – MuseumAI
 
 ## Role
 
@@ -56,3 +56,11 @@ Coding Agent phải ghi rõ:
 - Database migration nếu có.
 - Business Rule liên quan.
 - Use Case liên quan.
+
+## Thực hiện theo phạm vi hiện hành
+
+Đọc [quy trình chung](../workflow.md), [prompt](../prompts/coding-prompt.md) và [backend-development](../skills/backend-development/SKILL.md), [frontend-development](../skills/frontend-development/SKILL.md).
+
+Đọc requirement/design và git diff trước sửa. Giữ contract, JWT/RBAC, backend pricing và thay đổi có sẵn. Sửa nhỏ nhất; schema đổi cần Alembic, AI dùng skill chuyên biệt. Chạy kiểm chứng phù hợp, báo file đổi và handoff Testing/Critic; không tự deploy.
+
+Vai trò không tự cấp quyền push/deploy/ghi database; quyền đã có trong phiên được giữ nguyên. Handoff không yêu cầu khởi tạo nhiều agent chỉ vì tài liệu có nhiều vai trò.

@@ -90,68 +90,52 @@ Các miền nghiệp vụ chính:
 
 - Gemini AI.
 
+### Deployment
+
+- Hiện hành đã xác nhận: Azure VM/Docker Compose, Caddy và Azure PostgreSQL Flexible Server.
+- Railway khi được yêu cầu; xác minh service/provider trước deploy, không suy từ tài liệu cũ.
+
 ---
 
 # 3. Agent Registry
 
-MuseumAI sử dụng 6 Agent.
+MuseumAI có 11 vai trò Agent trong [catalog](ai_sdlc/catalog.json). Đây là tài liệu, không tự đăng ký hoặc chạy native subagent.
 
 | Agent | Trách nhiệm chính |
 |---|---|
-| Requirement Agent | Phân tích và chuẩn hóa yêu cầu |
-| Design Agent | Thiết kế hệ thống và UML |
-| Coding Agent | Phát triển Backend và Frontend |
-| Testing Agent | Kiểm thử và xác minh hệ thống |
-| Critic Agent | Review Requirement, Design, Code và Test |
-| Deployment Agent | Chuẩn bị và thực hiện Deployment |
-
-Agent definitions nằm tại:
-
-```text
-ai_sdlc/agents/
-├── requirement-agent.md
-├── design-agent.md
-├── coding-agent.md
-├── testing-agent.md
-├── critic-agent.md
-└── deployment-agent.md
-```
+| [Requirement Agent](ai_sdlc/agents/requirement-agent.md) | Phân tích yêu cầu, UC, Business Rule và acceptance criteria |
+| [Design Agent](ai_sdlc/agents/design-agent.md) | Thiết kế kiến trúc, ERD, UML và API contract |
+| [Coding Agent](ai_sdlc/agents/coding-agent.md) | Phát triển backend/frontend đúng phạm vi |
+| [Testing Agent](ai_sdlc/agents/testing-agent.md) | Kiểm thử an toàn và xác minh hồi quy |
+| [Critic Agent](ai_sdlc/agents/critic-agent.md) | Review tính nhất quán và bằng chứng phát hành |
+| [Deployment Agent](ai_sdlc/agents/deployment-agent.md) | Push/deploy đúng đích, verification và rollback |
+| [AI Engineer Agent](ai_sdlc/agents/ai-engineer-agent.md) | Tích hợp Gemini, xử lý lỗi và đánh giá prompt |
+| [Security Agent](ai_sdlc/agents/security-agent.md) | Rà JWT/RBAC, PII, upload và secret |
+| [Database Agent](ai_sdlc/agents/database-agent.md) | SQLAlchemy, SSL, Alembic và thay đổi dữ liệu |
+| [Incident Agent](ai_sdlc/agents/incident-agent.md) | Chẩn đoán sự cố bằng bằng chứng |
+| [Documentation Agent](ai_sdlc/agents/documentation-agent.md) | README, báo cáo, demo và nhật ký AI-SDLC |
 
 ---
 
 # 4. Skill Registry
 
-MuseumAI sử dụng 7 Skill chính.
+MuseumAI có 13 Skill: 7 nền tảng và 6 chuyên biệt.
 
 | Skill | Mục đích |
 |---|---|
-| Requirement Analysis | Phân tích yêu cầu |
-| UML Design | Thiết kế UML |
-| Backend Development | Phát triển Backend |
-| Frontend Development | Phát triển Frontend |
-| Testing | Kiểm thử |
-| Code Review | Review source code |
-| Deployment | Triển khai hệ thống |
-
-Skill definitions nằm tại:
-
-```text
-ai_sdlc/skills/
-├── requirement-analysis/
-│   └── SKILL.md
-├── uml-design/
-│   └── SKILL.md
-├── backend-development/
-│   └── SKILL.md
-├── frontend-development/
-│   └── SKILL.md
-├── testing/
-│   └── SKILL.md
-├── code-review/
-│   └── SKILL.md
-└── deployment/
-    └── SKILL.md
-```
+| [requirement-analysis](ai_sdlc/skills/requirement-analysis/SKILL.md) | Phân tích đặc tả yêu cầu của hệ thống MuseumAI, bao gồm Actor, Use Case, Functional Requirement, Business Rule và RBAC. |
+| [uml-design](ai_sdlc/skills/uml-design/SKILL.md) | Thiết kế và kiểm tra UML cho hệ thống MuseumAI dựa trên đặc tả yêu cầu. |
+| [backend-development](ai_sdlc/skills/backend-development/SKILL.md) | Phát triển và kiểm tra Backend MuseumAI bằng FastAPI, SQLAlchemy, PostgreSQL, Alembic, JWT và RBAC. |
+| [frontend-development](ai_sdlc/skills/frontend-development/SKILL.md) | Phát triển giao diện React và Vite cho hệ thống MuseumAI theo Use Case và RBAC. |
+| [testing](ai_sdlc/skills/testing/SKILL.md) | Kiểm thử hệ thống MuseumAI theo yêu cầu, Business Rule, API, RBAC và chức năng AI. |
+| [code-review](ai_sdlc/skills/code-review/SKILL.md) | Review code MuseumAI theo yêu cầu, kiến trúc, bảo mật, RBAC và Business Rule. |
+| [deployment](ai_sdlc/skills/deployment/SKILL.md) | Triển khai MuseumAI lên Azure VM với Docker Compose hoặc Railway theo môi trường được xác nhận, có rollback và bằng chứng domain. |
+| [ai-integration](ai_sdlc/skills/ai-integration/SKILL.md) | Tích hợp và sửa lỗi Gemini cho narration, management assistant và phân tích feedback; dùng khi thay request, response hoặc xử lý lỗi AI. |
+| [prompt-evaluation](ai_sdlc/skills/prompt-evaluation/SKILL.md) | So sánh ba phiên bản prompt MuseumAI bằng dữ liệu có đáp án đối chiếu, kiểm tra bịa số liệu, quyền truy cập và chất lượng nội dung. |
+| [security-review](ai_sdlc/skills/security-review/SKILL.md) | Rà soát ranh giới dữ liệu và quyền trong JWT, RBAC, upload, Gemini và cấu hình triển khai MuseumAI. |
+| [database-management](ai_sdlc/skills/database-management/SKILL.md) | Phân tích SQLAlchemy, Alembic, PostgreSQL SSL và kế hoạch migration/khôi phục MuseumAI; không mặc định thực thi production. |
+| [incident-diagnosis](ai_sdlc/skills/incident-diagnosis/SKILL.md) | Truy nguyên lỗi HTTP 5xx, CORS, ảnh 404, sai cấu hình hoặc bản build MuseumAI bằng bằng chứng có thể tái hiện. |
+| [technical-documentation](ai_sdlc/skills/technical-documentation/SKILL.md) | Viết README, báo cáo kỹ thuật, kịch bản demo, ma trận truy vết và nhật ký AI-SDLC MuseumAI dựa trên bằng chứng. |
 
 ---
 
@@ -159,12 +143,17 @@ ai_sdlc/skills/
 
 | Agent | Skill |
 |---|---|
-| Requirement Agent | Requirement Analysis |
-| Design Agent | UML Design |
-| Coding Agent | Backend Development, Frontend Development |
-| Testing Agent | Testing |
-| Critic Agent | Code Review, Requirement Analysis, UML Design |
-| Deployment Agent | Deployment |
+| Requirement Agent | requirement-analysis |
+| Design Agent | uml-design |
+| Coding Agent | backend-development, frontend-development |
+| Testing Agent | testing |
+| Critic Agent | code-review, requirement-analysis, uml-design |
+| Deployment Agent | deployment |
+| AI Engineer Agent | ai-integration, prompt-evaluation |
+| Security Agent | security-review |
+| Database Agent | database-management |
+| Incident Agent | incident-diagnosis |
+| Documentation Agent | technical-documentation |
 
 ---
 
@@ -312,6 +301,8 @@ Baseline permissions:
 | AI Narration | Yes | Yes | No |
 | AI Assistant | Yes | Yes | Yes |
 | AI Feedback Analysis | Yes | No | Yes |
+
+Bảng trên là định hướng nhóm chức năng, không thay ma trận quyền theo từng endpoint/action. Ví dụ quyền đọc danh sách triển lãm của Ticket Staff phải đối chiếu router hiện tại; không tự bỏ quyền chỉ vì bảng tổng hợp ghi No. Dashboard có thống kê riêng theo role và null là ngoài quyền.
 
 Backend phải thực thi Authorization.
 
@@ -1553,6 +1544,7 @@ Sử dụng Evidence từ:
 4. Testing Agent.
 5. Critic Agent.
 6. Deployment Agent.
+7. Các Agent chuyên biệt trong ai_sdlc/catalog.json.
 
 Với mỗi Agent kiểm tra:
 
@@ -1564,7 +1556,7 @@ Với mỗi Agent kiểm tra:
 - Có cung cấp Evidence không?
 - Có handoff đúng không?
 
-Đánh giá từng Skill:
+Đánh giá toàn bộ Skill trong ai_sdlc/catalog.json; các Skill nền tảng gồm:
 
 - Requirement Analysis.
 - UML Design.
@@ -1993,3 +1985,42 @@ Khi không đủ thông tin:
 ```
 
 Không suy đoán để tiếp tục như thể thông tin đã được xác nhận.
+
+# Prompt chuyên biệt và quy trình hiện hành
+
+Đọc [workflow](ai_sdlc/workflow.md) cùng các prompt 00–12 phía trên. Hướng dẫn dùng chung và quyền người dùng trong phiên quyết định cách áp dụng; prompt mẫu không tự cấp quyền gọi AI thật, push, deploy hoặc ghi database.
+
+Không cần spawn nhiều agent để thực hiện các vai trò. Tác vụ chỉ tài liệu không cần build/deploy ứng dụng. Nếu đã được phép push/deploy đúng phạm vi, không yêu cầu duyệt lại cùng hành động.
+
+## Prompt tác vụ theo vai trò
+
+| Vai trò | Prompt | Skill |
+|---|---|---|
+| Requirement Agent | [Mở prompt](ai_sdlc/prompts/requirement-prompt.md) | requirement-analysis |
+| Design Agent | [Mở prompt](ai_sdlc/prompts/design-prompt.md) | uml-design |
+| Coding Agent | [Mở prompt](ai_sdlc/prompts/coding-prompt.md) | backend-development, frontend-development |
+| Testing Agent | [Mở prompt](ai_sdlc/prompts/testing-prompt.md) | testing |
+| Critic Agent | [Mở prompt](ai_sdlc/prompts/critic-prompt.md) | code-review, requirement-analysis, uml-design |
+| Deployment Agent | [Mở prompt](ai_sdlc/prompts/deployment-prompt.md) | deployment |
+| AI Engineer Agent | [Mở prompt](ai_sdlc/prompts/ai-engineer-prompt.md) | ai-integration, prompt-evaluation |
+| Security Agent | [Mở prompt](ai_sdlc/prompts/security-prompt.md) | security-review |
+| Database Agent | [Mở prompt](ai_sdlc/prompts/database-prompt.md) | database-management |
+| Incident Agent | [Mở prompt](ai_sdlc/prompts/incident-prompt.md) | incident-diagnosis |
+| Documentation Agent | [Mở prompt](ai_sdlc/prompts/documentation-prompt.md) | technical-documentation |
+
+## Bằng chứng và nhật ký
+
+- [Handoff](ai_sdlc/templates/handoff.md): phạm vi, UC, diff, kiểm chứng và bước tiếp theo.
+- [Prompt experiment](ai_sdlc/templates/prompt-experiment.md): ba prompt thực tế, fixture/đáp án chuẩn, tiêu chí, kết quả và giới hạn; NOT RUN nếu chưa gọi AI.
+- [Nhật ký AI-SDLC](ai_sdlc/templates/ai-sdlc-log.md): AI và con người thực hiện gì, đề xuất bị loại, tự kiểm chứng và hạn chế.
+- [Deployment record](ai_sdlc/templates/deployment-record.md): push/build/deploy riêng, artifact trước/sau và rollback.
+
+Chat 200 có thể là fallback; health không chứng minh database hoặc AI; mock không chứng minh độ đúng lịch sử. Không tự dựng root cause production từ fixture. Không lưu raw dotenv, auth header, private key, PII hoặc prompt chứa dữ liệu cá nhân vào Git.
+
+## Kiểm tra bộ hướng dẫn
+
+```powershell
+python ai_sdlc/scripts/validate_catalog.py
+```
+
+Validator chỉ đọc tài liệu/catalog, không import app, đọc dotenv, kết nối database hoặc gọi Gemini. Chi tiết routing và cấu trúc nằm ở [ai_sdlc/README.md](ai_sdlc/README.md).

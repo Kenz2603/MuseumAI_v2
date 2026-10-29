@@ -1,4 +1,4 @@
-﻿---
+---
 name: requirement-analysis
 description: Phân tích đặc tả yêu cầu của hệ thống MuseumAI, bao gồm Actor, Use Case, Functional Requirement, Business Rule và RBAC.
 ---
@@ -66,3 +66,11 @@ Kiểm tra quyền của:
 - RBAC
 - Acceptance Criteria
 - Human Review items
+
+## Hướng dẫn theo source và môi trường
+
+Đọc [quy trình chung](../../workflow.md).
+
+Phân biệt nghiệp vụ xác nhận với hành vi hiện tại có thể là defect. Visitor trong database không tự có quyền Management UI. List/create/update/delete có thể khác quyền, đối chiếu từng router action.
+
+Không thêm đăng ký công khai, reset mật khẩu, RAG, thanh toán hay dự báo tài chính từ mẫu đề tài khác. Ngoài UC001–UC012 ghi PROPOSED và xác nhận tiêu chí trước implementation. Dùng [handoff](../../templates/handoff.md) khi cần.

@@ -1,4 +1,4 @@
-﻿# Testing Agent – MuseumAI
+# Testing Agent – MuseumAI
 
 ## Role
 
@@ -56,3 +56,11 @@ Defect phải chỉ rõ:
 - Actual Result.
 - Evidence.
 - Severity.
+
+## Thực hiện theo phạm vi hiện hành
+
+Đọc [quy trình chung](../workflow.md), [prompt](../prompts/testing-prompt.md) và [testing](../skills/testing/SKILL.md).
+
+Xác định môi trường và tác động ghi trước import/test. Dùng fixture/mock hoặc database test riêng; không Azure production mặc định. Kiểm tra success/negative/RBAC/giá vé/AI failures và không tự lưu bản nháp. Báo lệnh, exit code, expected/actual, PASS/FAIL/NOT RUN, mock và dịch vụ thật riêng. Chỉ test thì không tự sửa source; yêu cầu cả sửa lỗi cho phép tiếp tục phần được giao.
+
+Vai trò không tự cấp quyền push/deploy/ghi database; quyền đã có trong phiên được giữ nguyên. Handoff không yêu cầu khởi tạo nhiều agent chỉ vì tài liệu có nhiều vai trò.

@@ -1,5 +1,7 @@
 # MuseumAI
 
+Bộ agent, prompt, skill và biểu mẫu AI-SDLC: [ai_sdlc/README.md](ai_sdlc/README.md).
+
 Cấu hình kết nối Azure PostgreSQL, môi trường frontend và Railway: [CONFIGURATION.md](CONFIGURATION.md).
 
 ## Hệ thống quản lý bảo tàng tích hợp trí tuệ nhân tạo

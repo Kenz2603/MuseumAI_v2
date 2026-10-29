@@ -1,4 +1,4 @@
-﻿---
+---
 name: frontend-development
 description: Phát triển giao diện React và Vite cho hệ thống MuseumAI theo Use Case và RBAC.
 ---
@@ -60,3 +60,11 @@ Giá vé phải lấy từ Backend.
 - Authentication state
 - Role-based UI
 - Error handling
+
+## Hướng dẫn theo source và môi trường
+
+Đọc [quy trình chung](../../workflow.md).
+
+src/api/config.js là nguồn API URL chung. Vite đóng gói VITE_API_URL lúc build; runtime env không sửa bundle cũ. Không đưa secret vào VITE_*.
+
+Dashboard dùng null/thiếu dữ liệu quyền để ẩn thẻ; số 0 hợp lệ vẫn hiển thị. LocalStorage không thay quyền backend. Kiểm tra relative/absolute image URL, multipart, detail lỗi string/list, loading/error và draft AI. Không sửa module ảnh/UI ngoài phạm vi. Chạy npm run build và lint file bị đổi.

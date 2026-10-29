@@ -1,4 +1,4 @@
-﻿---
+---
 name: backend-development
 description: Phát triển và kiểm tra Backend MuseumAI bằng FastAPI, SQLAlchemy, PostgreSQL, Alembic, JWT và RBAC.
 ---
@@ -71,3 +71,11 @@ Mọi thay đổi cấu trúc database phải được quản lý bằng migrati
 - Database logic
 - Migration
 - Error handling
+
+## Hướng dẫn theo source và môi trường
+
+Đọc [quy trình chung](../../workflow.md).
+
+Kiểm tra core/config.py trước import: env tiến trình ưu tiên dotenv, DEBUG phải parse boolean, startup seed có thể ghi dữ liệu. Không chạy ứng dụng/Alembic với Azure production chỉ để kiểm tra cú pháp.
+
+Giá vé checklist phía trên phải đối chiếu models/ticket.py và routers/tickets.py của phiên bản xử lý. Không đổi giá để khớp test cũ; giữ Decimal, transaction và quyền theo hành động. Gemini dùng [AI Integration](../ai-integration/SKILL.md); schema dùng [Database Management](../database-management/SKILL.md). Giữ diff nhỏ, báo contract trước/sau.

@@ -1,4 +1,4 @@
-﻿---
+---
 name: testing
 description: Kiểm thử hệ thống MuseumAI theo yêu cầu, Business Rule, API, RBAC và chức năng AI.
 ---
@@ -76,3 +76,20 @@ Kiểm tra trường hợp AI không khả dụng và cách hệ thống xử l�
 - Actual Result
 - Pass/Fail
 - Defect
+
+## Hướng dẫn theo source và môi trường
+
+Đọc [quy trình chung](../../workflow.md).
+
+Đọc backend/tests/support.py trước dùng harness. Từ backend dùng Python virtual environment:
+
+```powershell
+.\.venv\Scripts\python.exe -m unittest discover -s tests -t . -v
+.\.venv\Scripts\python.exe -m compileall -q app tests
+```
+
+Frontend: npm run build, npm run lint hoặc lint file. Ruff khi đã có, không tự thêm dependency production cho test.
+
+Harness hiện dùng settings giả, bỏ dotenv, tắt seed, mock session và chặn network; test khác không mặc nhiên có các bảo vệ đó. Đăng nhập ghi login_history. Không dùng production cho CRUD/migration.
+
+Mock AI success/quota/credentials/timeout/malformed/blocked/truncated/retry/no-write và hồi quy Chat fallback/RBAC. [Prompt Evaluation](../prompt-evaluation/SKILL.md) đo chất lượng; mock không chứng minh nội dung lịch sử hay key/model thật. Giá vé phải đối chiếu source. Báo exit code, warning, NOT RUN; không lặp suite đã PASS khi không có thay đổi/rủi ro mới.

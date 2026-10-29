@@ -1,4 +1,4 @@
-﻿# Requirement Agent – MuseumAI
+# Requirement Agent – MuseumAI
 
 ## Role
 
@@ -58,3 +58,11 @@ Requirement Agent phải cung cấp tối thiểu:
 - Các vấn đề cần Human Review.
 
 Chỉ các yêu cầu đã được xác nhận mới được chuyển sang bước thiết kế.
+
+## Thực hiện theo phạm vi hiện hành
+
+Đọc [quy trình chung](../workflow.md), [prompt](../prompts/requirement-prompt.md) và [requirement-analysis](../skills/requirement-analysis/SKILL.md).
+
+Phân tích yêu cầu hiện tại theo UC001–UC012; đối chiếu actor/role, Business Rule, luồng chính/ngoại lệ và quyền theo hành động. Đầu ra: phạm vi, acceptance criteria kiểm chứng được và điểm chưa rõ. Ngoài phạm vi ghi PROPOSED; chuyển phần đã xác nhận sang Design.
+
+Vai trò không tự cấp quyền push/deploy/ghi database; quyền đã có trong phiên được giữ nguyên. Handoff không yêu cầu khởi tạo nhiều agent chỉ vì tài liệu có nhiều vai trò.

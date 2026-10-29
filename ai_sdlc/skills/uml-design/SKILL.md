@@ -1,4 +1,4 @@
-﻿---
+---
 name: uml-design
 description: Thiết kế và kiểm tra UML cho hệ thống MuseumAI dựa trên đặc tả yêu cầu.
 ---
@@ -45,3 +45,11 @@ Gemini AI API là hệ thống bên ngoài được sử dụng cho các chức 
 - Relationship
 - Main Flow
 - Alternative Flow nếu đã được đặc tả
+
+## Hướng dẫn theo source và môi trường
+
+Đọc [quy trình chung](../../workflow.md).
+
+Bổ sung ERD, contract API, component/deployment diagram khi cần; không vẽ thành phần chưa có như đã triển khai. Đối chiếu SQLAlchemy/migration: User/Role, Artifact, ExhibitionArea, Exhibition, ExhibitionArtifact, Visitor, Ticket, Feedback, LoginHistory; thể hiện PK/FK/cardinality/optional/unique thật.
+
+Sequence AI: quyền → query dữ liệu được phép → khử dữ liệu nhạy cảm khi cần → Gemini → validate response → draft; lưu là action riêng. Tách local, Azure VM/Compose và Azure PostgreSQL; Railway khi được chọn. Ghi schema/contract impact và tiêu chí test.
